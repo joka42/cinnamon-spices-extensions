@@ -59,13 +59,13 @@ MaximizedPolicy.prototype = {
 
 	enable: function () {
 		this._signals = new SignalManager.SignalManager(null);
-		this._signals.connect(global.window_manager, "maximize", this._on_window_appeared, this);
-		this._signals.connect(global.window_manager, "map", this._on_window_appeared, this);
+		// this._signals.connect(global.window_manager, "maximize", this._on_window_appeared, this);
+		// this._signals.connect(global.window_manager, "map", this._on_window_appeared, this);
 
-		this._signals.connect(global.window_manager, "minimize", this._on_window_disappeared, this);
-		this._signals.connect(global.window_manager, "unmaximize", this._on_window_disappeared, this);
-		this._signals.connect(global.screen, "window-removed", this.lookup_all_monitors, this);
-		this._signals.connect(global.window_manager, "switch-workspace", this.lookup_all_monitors, this);
+		// this._signals.connect(global.window_manager, "minimize", this._on_window_disappeared, this);
+		// this._signals.connect(global.window_manager, "unmaximize", this._on_window_disappeared, this);
+		// this._signals.connect(global.screen, "window-removed", this.lookup_all_monitors, this);
+		// this._signals.connect(global.window_manager, "switch-workspace", this.lookup_all_monitors, this);
 
 		this._set_up_startup_signals();
 	},
@@ -112,13 +112,13 @@ MaximizedPolicy.prototype = {
 	_on_window_added_startup: function (display, win) {
 		if(win.get_window_type() === Meta.WindowType.DESKTOP) {
 			this._signals.connect(win, "focus", this._on_desktop_focused, this);
-		} else if(this._is_window_maximized(win)) {
-			let monitor = win.get_monitor();
-			if(this.transparent[monitor]) {
-				this.transparent[monitor] = false;
-				this.controller.on_state_change(monitor);
-			}
-		}
+		} //else if(this._is_window_maximized(win)) {
+		// 	let monitor = win.get_monitor();
+		// 	if(this.transparent[monitor]) {
+		// 		this.transparent[monitor] = false;
+		// 		this.controller.on_state_change(monitor);
+		// 	}
+		// }
 	},
 
 	_is_window_maximized: function (win) {
